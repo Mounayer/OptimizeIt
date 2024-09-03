@@ -2,6 +2,8 @@
 
 OptimizeIt is a tool that is meant to help you Optimize your code. You simply run this command-line application and give it a source code file name which it then optimizes for peak performance and readability.
 
+![ezgif-4-f1aeeea586](https://github.com/user-attachments/assets/b5385492-bcd8-4ba9-bc6a-ceef14c43e0c)
+
 ## How to run
 
 Create a .env file, and provide your api key, i.e.:
