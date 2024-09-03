@@ -4,6 +4,8 @@ OptimizeIt is a tool that is meant to help you Optimize your code. You simply ru
 
 ![ezgif-4-f1aeeea586](https://github.com/user-attachments/assets/b5385492-bcd8-4ba9-bc6a-ceef14c43e0c)
 
+If you'd like to see more, here is a link to a thorough [Demo](https://www.youtube.com/watch?v=VFKODkI7xw4).
+
 ## How to run
 
 Create a .env file, and provide your api key, i.e.:
