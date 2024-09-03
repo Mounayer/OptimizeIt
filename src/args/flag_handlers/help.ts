@@ -6,7 +6,7 @@
 function handleHelpFlag(args: string[]) {
   if (args.includes('--help') || args.includes('-h')) {
     console.log(`
-  Usage: optimizeit [options] <file1> [file2]
+  Usage: optimizeit <file1> [file2] [options]
   
   Options:
     -h, --help             Show this help message and exit
