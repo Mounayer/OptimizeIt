@@ -8,9 +8,10 @@ import prettierConfig from 'eslint-config-prettier';
 export default [
   {
     files: ['**/*.{js,mjs,cjs,ts}'],
+    ignores: ['dist/**', 'examples/**', 'output/**'],
     languageOptions: {
       parser: tsParser,
-      globals: globals.browser,
+      globals: { ...globals.browser, ...globals.node },
     },
     plugins: {
       prettier,
@@ -20,6 +21,7 @@ export default [
       ...pluginJs.configs.recommended.rules,
       ...tseslint.configs.recommended.rules,
       'prettier/prettier': 'error',
+      '@typescript-eslint/no-explicit-any': 'off',
     },
   },
   prettierConfig,

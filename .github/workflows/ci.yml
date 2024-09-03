@@ -1,0 +1,60 @@
+name: CI
+
+on:
+  pull_request:
+    # only run on ready for review pr
+    branches:
+      - '**'
+    types: # rules for when the CI workflow will run
+      - opened # run when pr is opened
+      - reopened # run when pr is reopened
+      - ready_for_review # run when pr is ready for review
+      - synchronize # run when new commits are pushed
+
+jobs:
+  build:
+    if: ${{ github.event.pull_request.draft == false }}
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [20.x]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run build
+        run: npm run build
+
+  lint:
+    if: ${{ github.event.pull_request.draft == false }}
+    needs: build # only run when build passes
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [20.x]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run linting
+        run: npm run lint

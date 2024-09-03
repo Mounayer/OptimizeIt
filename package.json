@@ -10,6 +10,9 @@
     "dev": "nodemon",
     "start": "ts-node src/main.ts"
   },
+  "bin": {
+    "optimizeit": "./dist/main.js"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -28,6 +31,7 @@
     "typescript-eslint": "^8.4.0"
   },
   "dependencies": {
+    "dotenv": "^16.4.5",
     "groq-sdk": "^0.6.1"
   }
 }
