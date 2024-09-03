@@ -82,7 +82,7 @@ optimizeit file1 file2 --md
 
 ### Output
 
-This creates afile in the output folder containing all the changes, you may provide more than 1 output file per file given, usage:
+This creates a file in the output folder containing all the changes, you may provide more than 1 output file per file given, usage:
 
 ```bash
 optimizeit file1 --output file1
@@ -104,7 +104,7 @@ optimizeit file1 file2 -m model_name
 
 ### Temperature
 
-This specifies the temperature of the model that OptimizeIt is using, you may specify values from `0.1` to `2.0` although, the higher the temperature the more [hallucinations](https://www.iguazio.com/glossary/llm-hallucination/):
+This specifies the temperature of the model that OptimizeIt is using, you may specify values from `0.1` to `2.0` although, the higher the temperature the more [hallucinations](https://www.iguazio.com/glossary/llm-hallucination/), usage:
 
 ```bash
 optimizeit file1 --temperature 0.1
