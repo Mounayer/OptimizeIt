@@ -1,17 +1,21 @@
 {
   "name": "optimizeit",
-  "version": "0.0.1",
-  "description": "",
+  "version": "0.1.0",
+  "description": "OptimizeIt is a command-line tool that automatically optimizes source code for performance and readability, supporting multiple programming languages and configurable settings.",
   "main": "index.js",
   "scripts": {
     "build": "tsc",
     "lint": "eslint .",
+    "lint:fix": "eslint --fix .",
     "prettier": "prettier --write .",
     "dev": "nodemon",
     "start": "ts-node src/main.ts"
   },
+  "bin": {
+    "optimizeit": "./dist/main.js"
+  },
   "keywords": [],
-  "author": "",
+  "author": "Majd Al Mnayer",
   "license": "ISC",
   "devDependencies": {
     "@eslint/js": "^9.9.1",
@@ -28,6 +32,7 @@
     "typescript-eslint": "^8.4.0"
   },
   "dependencies": {
+    "dotenv": "^16.4.5",
     "groq-sdk": "^0.6.1"
   }
 }
