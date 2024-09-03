@@ -7,6 +7,7 @@ import argHandler from './args';
 import fileWriter from './file_writer';
 import type { MarkDownPayload } from './interfaces';
 import markDownFileWriter from './markdown_file_writer';
+import htmlFileWriter from './html_file_writer';
 
 /**
  * Main function to run the program.
@@ -20,6 +21,7 @@ async function main() {
     output,
     outputFiles,
     markDown,
+    html,
   } = argHandler();
 
   const groqClient = GroqChat.getInstance(apiKey);
@@ -42,7 +44,7 @@ async function main() {
 
     if (response === 'Unable To Process') continue;
 
-    if (markDown) {
+    if (markDown || html) {
       allResponses.push({
         before: data,
         after: response as string,
@@ -56,6 +58,8 @@ async function main() {
   }
 
   if (markDown) markDownFileWriter(allResponses);
+
+  if (html) htmlFileWriter(allResponses);
 }
 
 main();

@@ -5,6 +5,7 @@ import handleHelpFlag from './flag_handlers/help';
 import handleApiKeyFlag from './flag_handlers/apiKey';
 import handleOutputFlag from './flag_handlers/output';
 import handleMarkdownFlag from './flag_handlers/markdown';
+import handleHTMLFlag from './flag_handlers/html';
 
 /**
  * Handles the file names passed as arguments.
@@ -40,6 +41,7 @@ function argHandler() {
   const apiKey = handleApiKeyFlag(args);
   const { output, outputFiles } = handleOutputFlag(args);
   const markDown = handleMarkdownFlag(args);
+  const html = handleHTMLFlag(args);
 
   return {
     fileNames,
@@ -49,6 +51,7 @@ function argHandler() {
     output,
     outputFiles,
     markDown,
+    html,
   };
 }
 

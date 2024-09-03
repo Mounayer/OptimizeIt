@@ -56,6 +56,15 @@ optimizeit --version
 optimizeit -v
 ```
 
+### html
+
+This is a great feature which generates a `changes.html` html file in the output directory, displaying side-by-side the before and after of each processed file, usage:
+
+```bash
+optimizeit file1 --html
+optimizeit file1 file2 --html
+```
+
 ### Markdown
 
 This is a nifty feature, where optimizeit creates a `changes.md` file for you in the output directory, displaying the `before` and `after` of every file provided after execution, usage:
