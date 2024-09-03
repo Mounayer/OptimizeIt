@@ -58,7 +58,7 @@ optimizeit --version
 optimizeit -v
 ```
 
-### html
+### HTML
 
 This is a great feature which generates a `changes.html` html file in the output directory, displaying side-by-side the before and after of each processed file, usage:
 
