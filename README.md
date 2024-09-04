@@ -6,6 +6,8 @@ OptimizeIt is a tool that is meant to help you Optimize your code. You simply ru
 
 If you'd like to see more, here is a link to a thorough [Demo](https://www.youtube.com/watch?v=VFKODkI7xw4).
 
+If you'd like to read more about how this project was approached, feel free to check out my [Blog Post](https://dev.to/majd_almnayer_2101/from-good-to-great-code-with-optimizeit-4p0n).
+
 ## How to run
 
 Create a .env file, and provide your api key, i.e.:
