@@ -8,7 +8,7 @@ import { MarkDownPayload } from '../interfaces';
  * @param after - The markdown code block.
  * @returns { string } The language of the code block.
  */
-function extractLanguage(after: string | undefined): string {
+export function extractLanguage(after: string | undefined): string {
   if (after) {
     const match = after.match(/^```(\w+)/);
     return match ? match[1] : '';

@@ -2,6 +2,10 @@
 
 OptimizeIt is a tool that is meant to help you Optimize your code. You simply run this command-line application and give it a source code file name which it then optimizes for peak performance and readability.
 
+![ezgif-4-f1aeeea586](https://github.com/user-attachments/assets/b5385492-bcd8-4ba9-bc6a-ceef14c43e0c)
+
+If you'd like to see more, here is a link to a thorough [Demo](https://www.youtube.com/watch?v=VFKODkI7xw4).
+
 ## How to run
 
 Create a .env file, and provide your api key, i.e.:
@@ -56,6 +60,15 @@ optimizeit --version
 optimizeit -v
 ```
 
+### HTML
+
+This is a great feature which generates a `changes.html` html file in the output directory, displaying side-by-side the before and after of each processed file, usage:
+
+```bash
+optimizeit file1 --html
+optimizeit file1 file2 --html
+```
+
 ### Markdown
 
 This is a nifty feature, where optimizeit creates a `changes.md` file for you in the output directory, displaying the `before` and `after` of every file provided after execution, usage:
@@ -69,7 +82,7 @@ optimizeit file1 file2 --md
 
 ### Output
 
-This creates afile in the output folder containing all the changes, you may provide more than 1 output file per file given, usage:
+This creates a file in the output folder containing all the changes, you may provide more than 1 output file per file given, usage:
 
 ```bash
 optimizeit file1 --output file1
@@ -91,7 +104,7 @@ optimizeit file1 file2 -m model_name
 
 ### Temperature
 
-This specifies the temperature of the model that OptimizeIt is using, you may specify values from `0.1` to `2.0` although, the higher the temperature the more [hallucinations](https://www.iguazio.com/glossary/llm-hallucination/):
+This specifies the temperature of the model that OptimizeIt is using, you may specify values from `0.1` to `2.0` although, the higher the temperature the more [hallucinations](https://www.iguazio.com/glossary/llm-hallucination/), usage:
 
 ```bash
 optimizeit file1 --temperature 0.1

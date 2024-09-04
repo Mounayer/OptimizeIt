@@ -33,6 +33,7 @@
   },
   "dependencies": {
     "dotenv": "^16.4.5",
-    "groq-sdk": "^0.6.1"
+    "groq-sdk": "^0.6.1",
+    "marked": "^14.1.0"
   }
 }
