@@ -9,7 +9,10 @@ export default class GroqChat {
   private groqClient: Groq;
 
   private constructor(apiKey: string) {
-    this.groqClient = new Groq({ apiKey });
+    this.groqClient = new Groq({
+      apiKey,
+      baseURL: 'https://api.openai.com/v1',
+    });
   }
 
   /**
