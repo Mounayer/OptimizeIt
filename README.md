@@ -16,6 +16,12 @@ Create a .env file, and provide your api key, i.e.:
 GROQ_API_KEY=YOUR_API_KEY_HERE
 ```
 
+Install dependencies:
+
+```bash
+npm install
+```
+
 Build:
 
 ```bash
@@ -79,7 +85,7 @@ This is a nifty feature, where optimizeit creates a `changes.md` file for you in
 optimizeit file1 --markdown
 optimizeit file1 file2 --markdown
 optimizeit file1 -md
-optimizeit file1 file2 --md
+optimizeit file1 file2 -md
 ```
 
 ### Output
@@ -134,3 +140,21 @@ This flag displays all of the details and configurations that OptimizeIt has, us
 optimizeit --help
 optimizeit -h
 ```
+
+## Notable Dependencies
+
+### Groq
+
+This [library](https://www.npmjs.com/package/groq-sdk) provides convenient and easy access to the Groq REST API from server-side TypeScript or JavaScript which allows using their LLM's for chat completion
+
+### Marked
+
+A [markdown parser](https://www.npmjs.com/package/marked) which converts markdown into HTML -- this was used for generating html pages after comparison. Marked is built for speed and super light-weight!
+
+### Prettier
+
+[Prettier](https://www.npmjs.com/package/prettier?activeTab=readme) is a code formatted which enforces consistent style by parsing the code and re-printing it with the rules set in `.prettierrc` file.
+
+### Eslint
+
+[Eslint](https://www.npmjs.com/package/eslint) is used to identify issues in and evaluate the code.
