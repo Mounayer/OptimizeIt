@@ -6,11 +6,7 @@
  */
 function handleTokenFlag(args: string[]): boolean {
   try {
-    console.log(`List of arguments: ${args}`);
-    const tokenFlagIndex = args.findIndex(
-      (arg) => arg === '--token-usage' || arg === '-tu',
-    );
-    return tokenFlagIndex !== -1;
+    return args.includes('--token-usage') || args.includes('-tu');
   } catch (err) {
     console.error(`Error getting token info: ${err}`);
     return false;
