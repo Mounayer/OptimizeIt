@@ -141,6 +141,16 @@ optimizeit --help
 optimizeit -h
 ```
 
+### Token Usage
+
+This flag allows you print the completion token, prompt token, and total token that OptimizeIt is using from your prompt, usage:
+
+```bash
+optimizeit file1 --token-usage
+optimizeit file1 file2 --tu
+```
+
+
 ## Notable Dependencies
 
 ### Groq
