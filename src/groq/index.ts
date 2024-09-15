@@ -141,7 +141,6 @@ export default class GroqChat {
    * Logs the total token usage information to the console.
    */
   public logTotalTokenUsage(fileNames: string[]): void {
-
     if (fileNames && fileNames.length > 0) {
       for (const fileName of fileNames) console.log(`File: ${fileName}`);
       console.log('\nHas the following token usage information:\n');
