@@ -95,9 +95,6 @@ export default class GroqChat {
         temperature,
       );
 
-      let tokenUsageInfo;
-      let chatData;
-
       if (tokenUsageInformation) {
         if (!chatCompletion.usage) {
           throw new Error('Token usage information is not available.');
@@ -105,7 +102,7 @@ export default class GroqChat {
         this.saveTokenUsageInfo(chatCompletion?.usage);
       }
 
-      chatData = chatCompletion.choices[0]?.message?.content || '';
+      const chatData = chatCompletion.choices[0]?.message?.content || '';
       console.log(chatData);
 
       return chatData;
@@ -129,7 +126,7 @@ export default class GroqChat {
    * @param tokenUsageInfo - The token usage information object.
    */
   public saveTokenUsageInfo(tokenUsageInfo: Groq.CompletionUsage): void {
-    console.log('Token Usage Information:');
+    console.log('Token Usage Information:\n');
 
     // Available properties:
     //console.error(`queue_time: ${tokenUsageInfo.queue_time}`);
@@ -142,14 +139,6 @@ export default class GroqChat {
 
     console.error(`Completion Tokens: ${tokenUsageInfo.completion_tokens}`);
     console.error(`Usage Prompt Tokens: ${tokenUsageInfo.prompt_tokens}`);
-    console.error(`Total Tokens: ${tokenUsageInfo.total_tokens}`);
-    
-    // Calculate tokens per second I'm not sure if this by milliseconds or seconds
-    if (tokenUsageInfo.total_tokens && tokenUsageInfo.total_time) {
-      const tokensPerSecond = tokenUsageInfo.total_tokens / tokenUsageInfo.total_time;
-      console.error(`Token per second: ${tokensPerSecond.toFixed(3)}`);
-    } else {
-      console.error('Cannot calculate tokens per second due to missing data.');
-    }
+    console.error(`Total Tokens: ${tokenUsageInfo.total_tokens}\n`);
   }
 }
