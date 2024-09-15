@@ -85,6 +85,7 @@ export default class GroqChat {
     context: string,
     model: string,
     temperature: number,
+    tokenUsageInformation: boolean,
   ): Promise<string | undefined> {
     try {
       const chatCompletion = await this.getGroqChatCompletion(
@@ -94,7 +95,17 @@ export default class GroqChat {
         temperature,
       );
 
-      const chatData = chatCompletion.choices[0]?.message?.content || '';
+      let tokenUsageInfo;
+      let chatData;
+
+      if (tokenUsageInformation) {
+        if (!chatCompletion.usage) {
+          throw new Error('Token usage information is not available.');
+        }
+        this.saveTokenUsageInfo(chatCompletion?.usage);
+      }
+
+      chatData = chatCompletion.choices[0]?.message?.content || '';
       console.log(chatData);
 
       return chatData;
@@ -109,6 +120,36 @@ export default class GroqChat {
       } else {
         console.error('An unexpected error occurred:', err);
       }
+    }
+  }
+
+  /**
+   * Logs the token usage information to the console. by args --token-usage or -tu
+   *
+   * @param tokenUsageInfo - The token usage information object.
+   */
+  public saveTokenUsageInfo(tokenUsageInfo: Groq.CompletionUsage): void {
+    console.log('Token Usage Information:');
+
+    // Available properties:
+    //console.error(`queue_time: ${tokenUsageInfo.queue_time}`);
+    //console.error(`usage_prompt_tokens: ${tokenUsageInfo.prompt_tokens}`);
+    //console.error(`prompt_time: ${tokenUsageInfo.prompt_time}`);
+    //console.error(`completion_tokens: ${tokenUsageInfo.completion_tokens}`);
+    //console.error(`completion_time: ${tokenUsageInfo.completion_time}`);
+    //console.error(`total_time: ${tokenUsageInfo.total_time}`);
+    //console.error(`total_tokens: ${tokenUsageInfo.total_tokens}`);
+
+    console.error(`Completion Tokens: ${tokenUsageInfo.completion_tokens}`);
+    console.error(`Usage Prompt Tokens: ${tokenUsageInfo.prompt_tokens}`);
+    console.error(`Total Tokens: ${tokenUsageInfo.total_tokens}`);
+    
+    // Calculate tokens per second I'm not sure if this by milliseconds or seconds
+    if (tokenUsageInfo.total_tokens && tokenUsageInfo.total_time) {
+      const tokensPerSecond = tokenUsageInfo.total_tokens / tokenUsageInfo.total_time;
+      console.error(`Token per second: ${tokensPerSecond.toFixed(3)}`);
+    } else {
+      console.error('Cannot calculate tokens per second due to missing data.');
     }
   }
 }

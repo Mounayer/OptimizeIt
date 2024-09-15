@@ -22,6 +22,7 @@ async function main() {
     outputFiles,
     markDown,
     html,
+    tokenUsageInformation, // add tokenUsageInformation for issue-12 to get information about token usage
   } = argHandler();
 
   const groqClient = GroqChat.getInstance(apiKey);
@@ -30,16 +31,14 @@ async function main() {
 
   for (let i = 0; i < fileNames.length; ++i) {
     const filePath = path.resolve(fileNames[i]);
-
     const data = fileParser(filePath);
-
-    console.log(`\nOptimizing ${fileNames[i]}...\n`);
 
     const response = await groqClient.run(
       fileNames[i],
       data,
       model,
       temperature,
+      tokenUsageInformation, // add tokenUsageInformation for issue-12 to get information about token usage
     );
 
     if (response === 'Unable To Process') continue;
