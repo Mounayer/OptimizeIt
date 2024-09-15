@@ -56,6 +56,8 @@ async function main() {
     }
   }
 
+  if (tokenUsageInformation) groqClient.logTotalTokenUsage(fileNames);
+
   if (markDown) markDownFileWriter(allResponses);
 
   if (html) htmlFileWriter(allResponses);

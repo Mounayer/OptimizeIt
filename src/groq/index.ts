@@ -8,6 +8,11 @@ export default class GroqChat {
   private static instance: GroqChat;
   private groqClient: Groq;
 
+  // Token usage information
+  private totalPromptTokens: number = 0;
+  private totalCompletionTokens: number = 0;
+  private totalTokens: number = 0;
+
   private constructor(apiKey: string) {
     this.groqClient = new Groq({
       apiKey,
@@ -95,11 +100,12 @@ export default class GroqChat {
         temperature,
       );
 
-      if (tokenUsageInformation) {
-        if (!chatCompletion.usage) {
-          throw new Error('Token usage information is not available.');
-        }
+      if (tokenUsageInformation && chatCompletion?.usage) {
         this.saveTokenUsageInfo(chatCompletion?.usage);
+      } else {
+        throw new Error(`
+        Token Usage Information is not available for file: ${fileName}
+        `);
       }
 
       const chatData = chatCompletion.choices[0]?.message?.content || '';
@@ -126,7 +132,20 @@ export default class GroqChat {
    * @param tokenUsageInfo - The token usage information object.
    */
   public saveTokenUsageInfo(tokenUsageInfo: Groq.CompletionUsage): void {
-    console.log('Token Usage Information:\n');
+    this.totalCompletionTokens += tokenUsageInfo.completion_tokens;
+    this.totalPromptTokens += tokenUsageInfo.prompt_tokens;
+    this.totalTokens += tokenUsageInfo.total_tokens;
+  }
+
+  /**
+   * Logs the total token usage information to the console.
+   */
+  public logTotalTokenUsage(fileNames: string[]): void {
+
+    if (fileNames && fileNames.length > 0) {
+      for (const fileName of fileNames) console.log(`File: ${fileName}`);
+      console.log('\nHas the following token usage information:\n');
+    }
 
     // Available properties:
     //console.error(`queue_time: ${tokenUsageInfo.queue_time}`);
@@ -137,8 +156,8 @@ export default class GroqChat {
     //console.error(`total_time: ${tokenUsageInfo.total_time}`);
     //console.error(`total_tokens: ${tokenUsageInfo.total_tokens}`);
 
-    console.error(`Completion Tokens: ${tokenUsageInfo.completion_tokens}`);
-    console.error(`Usage Prompt Tokens: ${tokenUsageInfo.prompt_tokens}`);
-    console.error(`Total Tokens: ${tokenUsageInfo.total_tokens}\n`);
+    console.error(`Completion Tokens: ${this.totalCompletionTokens}`);
+    console.error(`Usage Prompt Tokens: ${this.totalPromptTokens}`);
+    console.error(`Total Tokens: ${this.totalTokens}\n`);
   }
 }
