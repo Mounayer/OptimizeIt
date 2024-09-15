@@ -100,12 +100,11 @@ export default class GroqChat {
         temperature,
       );
 
-      if (tokenUsageInformation && chatCompletion?.usage) {
-        this.saveTokenUsageInfo(chatCompletion?.usage);
-      } else {
-        throw new Error(`
-        Token Usage Information is not available for file: ${fileName}
-        `);
+      if (tokenUsageInformation) {
+        if (!chatCompletion.usage) {
+          throw new Error('Token usage information is not available');
+        }
+        this.accumulateToken(chatCompletion?.usage);
       }
 
       const chatData = chatCompletion.choices[0]?.message?.content || '';
@@ -131,7 +130,7 @@ export default class GroqChat {
    *
    * @param tokenUsageInfo - The token usage information object.
    */
-  public saveTokenUsageInfo(tokenUsageInfo: Groq.CompletionUsage): void {
+  public accumulateToken(tokenUsageInfo: Groq.CompletionUsage): void {
     this.totalCompletionTokens += tokenUsageInfo.completion_tokens;
     this.totalPromptTokens += tokenUsageInfo.prompt_tokens;
     this.totalTokens += tokenUsageInfo.total_tokens;
@@ -142,8 +141,8 @@ export default class GroqChat {
    */
   public logTotalTokenUsage(fileNames: string[]): void {
     if (fileNames && fileNames.length > 0) {
-      for (const fileName of fileNames) console.log(`File: ${fileName}`);
-      console.log('\nHas the following token usage information:\n');
+      for (const fileName of fileNames) console.error(`File: ${fileName}`);
+      console.error('\nHas the following token usage information:\n');
     }
 
     // Available properties:
