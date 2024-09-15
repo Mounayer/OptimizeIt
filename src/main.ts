@@ -33,6 +33,8 @@ async function main() {
     const filePath = path.resolve(fileNames[i]);
     const data = fileParser(filePath);
 
+    console.log(`\nOptimizing ${fileNames[i]}...\n`);
+
     const response = await groqClient.run(
       fileNames[i],
       data,
