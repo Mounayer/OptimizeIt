@@ -17,6 +17,7 @@ function handleHelpFlag(args: string[]) {
     -m, --model <name>     Specify the model name to use
     -t, --temperature <n>  Set model temperature (0.1 to 2)
     -a, --api-key <key>    Provide your API key
+    -tu, --token-usage     Get token usage information
   
   Examples:
     optimizeit file1
@@ -28,6 +29,7 @@ function handleHelpFlag(args: string[]) {
     optimizeit file1 --model model_name
     optimizeit file1 -t 0.5
     optimizeit file1 --api-key your_api_key
+    optimizeit file1 --token-usage
       `);
     process.exit(0);
   }
