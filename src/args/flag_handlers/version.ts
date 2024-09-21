@@ -7,11 +7,16 @@ import { readFileSync } from 'fs';
  * @param { string[] } args
  */
 function handleVersionFlag(args: string[]) {
-  if (args.includes('--version') || args.includes('-v')) {
-    const packageJsonPath = path.resolve(__dirname, '../../../package.json');
-    const packageJson = JSON.parse(readFileSync(packageJsonPath, 'utf8'));
-    console.log(`${packageJson.name} version ${packageJson.version}`);
-    process.exit(0);
+  try {
+    if (args.includes('--version') || args.includes('-v')) {
+      const packageJsonPath = path.resolve(__dirname, '../../../package.json');
+      const packageJson = JSON.parse(readFileSync(packageJsonPath, 'utf8'));
+      console.log(`${packageJson.name} version ${packageJson.version}`);
+      process.exit(0);
+    }
+  } catch (err) {
+    console.error('Error reading package.json:', err);
+    process.exit(1);
   }
 }
 

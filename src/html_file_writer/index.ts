@@ -92,43 +92,48 @@ async function htmlFileWriter(allResponses: MarkDownPayload[]): Promise<void> {
                   </html>
                   `;
 
-  const htmlBlocks = await Promise.all(
-    allResponses.map(async ({ before, after, fileName }) => {
-      const language = extractLanguage(after);
+  try {
+    const htmlBlocks = await Promise.all(
+      allResponses.map(async ({ before, after, fileName }) => {
+        const language = extractLanguage(after);
 
-      // Convert the before and after markdown to HTML
-      const beforeHtml = await markdownToHtml(
-        `\`\`\`${language}\n${before.trim()}\n\`\`\``,
-      );
+        // Convert the before and after markdown to HTML
+        const beforeHtml = await markdownToHtml(
+          `\`\`\`${language}\n${before.trim()}\n\`\`\``,
+        );
 
-      // Convert the after markdown to HTML
-      const afterHtml = await markdownToHtml(after ? after.trim() : '');
+        // Convert the after markdown to HTML
+        const afterHtml = await markdownToHtml(after ? after.trim() : '');
 
-      return `<div class="file-changes">
-                <div class="file-header">${fileName}</div>
-                <div class="change-block">
-                <div>
-                    <h3>Before</h3>
-                    <div>${beforeHtml}</div>
-                </div>
-                <div>
-                    <h3>After</h3>
-                    <div>${afterHtml}</div>
-                </div>
-                </div>
-            </div>`;
-    }),
-  );
+        return `<div class="file-changes">
+                    <div class="file-header">${fileName}</div>
+                    <div class="change-block">
+                    <div>
+                        <h3>Before</h3>
+                        <div>${beforeHtml}</div>
+                    </div>
+                    <div>
+                        <h3>After</h3>
+                        <div>${afterHtml}</div>
+                    </div>
+                    </div>
+                </div>`;
+      }),
+    );
 
-  htmlBlocks.forEach((block) => (content += block));
+    htmlBlocks.forEach((block) => (content += block));
 
-  content += `<script>
-                hljs.highlightAll();
-              </script>
-              </body>
-              </html>`;
+    content += `<script>
+                    hljs.highlightAll();
+                  </script>
+                  </body>
+                  </html>`;
 
-  fs.writeFileSync(htmlFilePath, content.trim());
+    fs.writeFileSync(htmlFilePath, content.trim());
+  } catch (err) {
+    console.error(`Error writing to HTML file: ${err}`);
+    process.exit(1);
+  }
 
   console.log(`HTML file created containing all changes: ${htmlFilePath}`);
 }

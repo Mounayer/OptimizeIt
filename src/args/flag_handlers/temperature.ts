@@ -17,6 +17,11 @@ function handleTemperatureFlag(args: string[]): number {
         ? parseFloat(args[temperatureFlagIndex + 1])
         : temperature;
 
+    if (isNaN(temperature)) {
+      console.error('Temperature value provided is invalid.');
+      process.exit(1);
+    }
+
     console.log('temperature:', temperature);
   }
 

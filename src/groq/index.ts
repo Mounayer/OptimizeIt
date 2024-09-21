@@ -133,6 +133,7 @@ export default class GroqChat {
       } else {
         console.error('An unexpected error occurred:', err);
       }
+      process.exit(1);
     }
   }
 
