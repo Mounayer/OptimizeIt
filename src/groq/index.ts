@@ -119,7 +119,13 @@ export default class GroqChat {
       }
 
       const chatData = chatCompletion.choices[0]?.message?.content || '';
-      console.log(chatData);
+
+      if (chatData === 'Unable To Process') {
+        console.error('Unable to process the file');
+      } else {
+        console.log(chatData);
+        // We don't exit here because there may be other files that are processable
+      }
 
       return chatData;
     } catch (err: any) {
