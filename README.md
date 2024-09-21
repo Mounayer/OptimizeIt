@@ -150,6 +150,20 @@ optimizeit file1 --token-usage
 optimizeit file1 file2 -tu
 ```
 
+### Directory
+
+This flag is very helpful if you want to optimize all files in a given directory, rather than specify them one by one. OptimizeIt will parse through every file that exists in the directory, and if the file can be `Optimized`, it will optimize it, usage:
+
+```bash
+optimizeit -d examples
+optimizeit --dir ./examples
+```
+
+This can also be conveniently combined with other flags, i.e.:
+
+```bash
+optimizeit -d examples --html
+```
 
 ## Notable Dependencies
 

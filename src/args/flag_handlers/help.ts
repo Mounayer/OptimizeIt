@@ -18,6 +18,7 @@ function handleHelpFlag(args: string[]) {
     -t, --temperature <n>  Set model temperature (0.1 to 2)
     -a, --api-key <key>    Provide your API key
     -tu, --token-usage     Get token usage information
+    -d, --dir <directory>  Specify a directory to optimize all files
   
   Examples:
     optimizeit file1
@@ -30,6 +31,7 @@ function handleHelpFlag(args: string[]) {
     optimizeit file1 -t 0.5
     optimizeit file1 --api-key your_api_key
     optimizeit file1 --token-usage
+    optimizeit -d directoryName
       `);
     process.exit(0);
   }
