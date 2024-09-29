@@ -6,6 +6,7 @@ import handleApiKeyFlag from './flag_handlers/apiKey';
 import handleOutputFlag from './flag_handlers/output';
 import handleMarkdownFlag from './flag_handlers/markdown';
 import handleHTMLFlag from './flag_handlers/html';
+import { Config } from '../interfaces';
 
 /**
  * Handles the file names passed as arguments.
@@ -30,18 +31,18 @@ function handleFileNames(args: string[]): string[] {
  *
  * @returns The arguments passed to the CLI.
  */
-function argHandler() {
+function argHandler(options: Config) {
   const args = process.argv.slice(2);
 
   handleVersionFlag(args);
   handleHelpFlag(args);
   const fileNames = handleFileNames(args);
-  const model = handleModelFlag(args);
-  const temperature = handleTemperatureFlag(args);
-  const apiKey = handleApiKeyFlag(args);
-  const { output, outputFiles } = handleOutputFlag(args);
-  const markDown = handleMarkdownFlag(args);
-  const html = handleHTMLFlag(args);
+  const model = handleModelFlag(args, options.model);
+  const temperature = handleTemperatureFlag(args, options.temperature);
+  const apiKey = handleApiKeyFlag(args, options.apiKey);
+  const { output, outputFiles } = handleOutputFlag(args, options.output);
+  const markDown = handleMarkdownFlag(args, options.markdown);
+  const html = handleHTMLFlag(args, options.html);
 
   return {
     fileNames,

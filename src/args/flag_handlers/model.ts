@@ -4,8 +4,11 @@
  * @param { string[] } args - The arguments passed to the CLI.
  * @returns { string } The model name.
  */
-function handleModelFlag(args: string[]): string {
-  let model = 'llama-3.1-70b-versatile';
+function handleModelFlag(
+  args: string[],
+  modelConfig: string = 'llama-3.1-70b-versatile',
+): string {
+  let model = modelConfig;
 
   const modelFlagIndex = args.findIndex(
     (arg) => arg === '-m' || arg === '--model',

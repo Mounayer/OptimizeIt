@@ -11,7 +11,7 @@ export default class GroqChat {
   private constructor(apiKey: string) {
     this.groqClient = new Groq({
       apiKey,
-      baseURL: 'https://api.openai.com/v1',
+      baseURL: 'https://api.groq.com',
     });
   }
 

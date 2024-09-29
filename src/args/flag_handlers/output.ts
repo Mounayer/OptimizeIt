@@ -6,9 +6,12 @@ import type { OutputFlagPayload } from '../../interfaces';
  * @param { string[] } args - The arguments passed to the CLI.
  * @returns  { OutputFlagPayload } The output flag and output files.
  */
-function handleOutputFlag(args: string[]): OutputFlagPayload {
+function handleOutputFlag(
+  args: string[],
+  outputConfig: string[] | undefined,
+): OutputFlagPayload {
   let output = false;
-  const outputFiles: string[] = []; // Initialize as an empty array
+  const outputFiles: string[] = outputConfig || []; // Initialize as an empty array
 
   const outputFlagIndex = args.findIndex(
     (arg) => arg === '-o' || arg === '--output',

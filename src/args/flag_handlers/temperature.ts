@@ -4,8 +4,11 @@
  * @param { string[] } args - The arguments passed to the CLI.
  * @returns { number } The temperature value.
  */
-function handleTemperatureFlag(args: string[]): number {
-  let temperature = 0.5;
+function handleTemperatureFlag(
+  args: string[],
+  tempConfig: number = 0.5,
+): number {
+  let temperature = tempConfig;
 
   const temperatureFlagIndex = args.findIndex(
     (arg) => arg === '-t' || arg === '--temperature',

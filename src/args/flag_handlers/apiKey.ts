@@ -4,8 +4,11 @@
  * @param { string[] } args - The arguments passed to the CLI.
  * @returns { string } The API key.
  */
-function handleApiKeyFlag(args: string[]): string {
-  let apiKey = process.env.GROQ_API_KEY || '';
+function handleApiKeyFlag(
+  args: string[],
+  apiKeyConfig: string | undefined,
+): string {
+  let apiKey = process.env.GROQ_API_KEY || apiKeyConfig || '';
 
   const apiKeyFlagIndex = args.findIndex(
     (arg) => arg === '-a' || arg === '--api-key',

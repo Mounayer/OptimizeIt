@@ -8,11 +8,17 @@ import fileWriter from './file_writer';
 import type { MarkDownPayload } from './interfaces';
 import markDownFileWriter from './markdown_file_writer';
 import htmlFileWriter from './html_file_writer';
+import { parse, stringify } from 'smol-toml';
 
 /**
  * Main function to run the program.
  */
 async function main() {
+  const config = fileParser('.options.toml');
+  const options = parse(config);
+  const parsed = stringify(options);
+  console.log(`Using options:\n${parsed}`);
+
   const {
     fileNames,
     model,
@@ -22,7 +28,7 @@ async function main() {
     outputFiles,
     markDown,
     html,
-  } = argHandler();
+  } = argHandler(options);
 
   const groqClient = GroqChat.getInstance(apiKey);
 
