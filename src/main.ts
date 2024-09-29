@@ -14,8 +14,7 @@ import tomlParser from './toml_parser';
  * Main function to run the program.
  */
 async function main() {
-  const config = fileParser('.options.toml');
-  const options = tomlParser(config);
+  const options = tomlParser();
 
   const {
     fileNames,
@@ -58,7 +57,6 @@ async function main() {
     }
 
     if (output && i < outputFiles.length) {
-      console.log(`Writing to ${outputFiles[i]}`);
       fileWriter(response as string, outputFiles[i]);
     }
   }
