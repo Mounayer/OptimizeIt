@@ -34,7 +34,7 @@ function handleFileNames(args: string[]): string[] {
  *
  * @returns The arguments passed to the CLI.
  */
-function argHandler(options: Config) {
+function argHandler(configOptions: Config) {
   const args = process.argv.slice(2);
 
   handleVersionFlag(args);
@@ -42,12 +42,12 @@ function argHandler(options: Config) {
   const directory = handleDirectoryFlag(args);
   const fileNames =
     directory !== null ? directoryParser(directory) : handleFileNames(args);
-  const model = handleModelFlag(args, options.model);
-  const temperature = handleTemperatureFlag(args, options.temperature);
-  const apiKey = handleApiKeyFlag(args, options.apiKey);
-  const { output, outputFiles } = handleOutputFlag(args, options.output);
-  const markDown = handleMarkdownFlag(args, options.markdown);
-  const html = handleHTMLFlag(args, options.html);
+  const model = handleModelFlag(args, configOptions.model);
+  const temperature = handleTemperatureFlag(args, configOptions.temperature);
+  const apiKey = handleApiKeyFlag(args, configOptions.apiKey);
+  const { output, outputFiles } = handleOutputFlag(args, configOptions.output);
+  const markDown = handleMarkdownFlag(args, configOptions.markdown);
+  const html = handleHTMLFlag(args, configOptions.html);
   const tokenUsageInformation = handleTokenFlag(args);
 
   return {

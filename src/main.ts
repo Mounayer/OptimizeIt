@@ -14,7 +14,7 @@ import tomlParser from './toml_parser';
  * Main function to run the program.
  */
 async function main() {
-  const options = tomlParser();
+  const configOptions = tomlParser();
 
   const {
     fileNames,
@@ -26,7 +26,7 @@ async function main() {
     markDown,
     html,
     tokenUsageInformation, // add tokenUsageInformation for issue-12 to get information about token usage
-  } = argHandler(options);
+  } = argHandler(configOptions);
 
   const groqClient = GroqChat.getInstance(apiKey);
 
