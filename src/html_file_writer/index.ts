@@ -29,95 +29,111 @@ async function htmlFileWriter(allResponses: MarkDownPayload[]): Promise<void> {
 
   const htmlFilePath = path.join(outputDir, 'changes.html');
 
-  let content = `<!DOCTYPE html>
-    <html lang="en">
-    <head>
-    <meta charset="UTF-8" />
-    <title>Changes</title>
-                <style>
-                body { 
-                    font-family: Arial, sans-serif; 
-                    margin: 20px; 
-                    background: #f9f9f9;
-                    color: #333;
-                }
-                .file-changes {
-                    background: #ffffff;
-                    border: 1px solid #ddd;
-                    padding: 15px;
-                    border-radius: 5px;
-                    margin-bottom: 40px;
-                    box-shadow: 0 2px 4px rgba(0,0,0,0.4);
-                    overflow: hidden;
-                }
-                .file-header {
-                    font-size: 1.2em;
-                    font-weight: bold;
-                    margin-bottom: 20px;
-                    text-align: center;
-                }
-                .change-block {
-                    display: flex;
-                    justify-content: space-between;
-                }
-                .change-block > div {
-                    flex: 1;
-                    background: #f0f0f0;
-                    padding: 10px;
-                    border-radius: 5px;
-                    margin: 0 10px;
-                }
-                pre {
-                    background: #e0e0e0;
-                    border-left: 3px solid #333;
-                    padding: 10px;
-                    overflow-x: auto;
-                    white-space: pre-wrap;
-                    word-break: break-word;
-                }
-                @media (max-width: 768px) {
-                    .change-block {
-                    flex-direction: column;
-                    }
-                }
-                </style>
-    </head>
-    <body>
-    <h1>Changes</h1>`;
+  let content = `
+                  <!DOCTYPE html>
+                  <html lang="en">
+                  <head>
+                      <meta charset="UTF-8" />
+                      <title>Changes</title>
+                      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
+                      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+                      <style>
+                          body { 
+                              font-family: Arial, sans-serif; 
+                              margin: 20px; 
+                              background: #f9f9f9;
+                              color: #333;
+                          }
+                          .file-changes {
+                              background: #ffffff;
+                              border: 1px solid #ddd;
+                              padding: 15px;
+                              border-radius: 5px;
+                              margin-bottom: 40px;
+                              box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+                              overflow: hidden;
+                          }
+                          .file-header {
+                              font-size: 1.2em;
+                              font-weight: bold;
+                              margin-bottom: 20px;
+                              text-align: center;
+                          }
+                          .change-block {
+                              display: flex;
+                              justify-content: space-between;
+                          }
+                          .change-block > div {
+                              flex: 1;
+                              background: #f0f0f0;
+                              padding: 10px;
+                              border-radius: 5px;
+                              margin: 0 10px;
+                          }
+                          pre {
+                              background: #e0e0e0;
+                              border-left: 3px solid #333;
+                              padding: 10px;
+                              overflow-x: auto;
+                              white-space: pre-wrap;
+                              word-break: break-word;
+                          }
+                          @media (max-width: 768px) {
+                              .change-block {
+                                  flex-direction: column;
+                              }
+                          }
+                      </style>
+                  </head>
+                  <body>
+                      <h1>Changes</h1>
+                      <!-- Add your content here -->
+                  </body>
+                  </html>
+                  `;
 
-  const htmlBlocks = await Promise.all(
-    allResponses.map(async ({ before, after, fileName }) => {
-      const language = extractLanguage(after);
+  try {
+    const htmlBlocks = await Promise.all(
+      allResponses.map(async ({ before, after, fileName }) => {
+        const language = extractLanguage(after);
 
-      // Convert the before and after markdown to HTML
-      const beforeHtml = await markdownToHtml(
-        `\`\`\`${language}\n${before.trim()}\n\`\`\``,
-      );
+        // Convert the before and after markdown to HTML
+        const beforeHtml = await markdownToHtml(
+          `\`\`\`${language}\n${before.trim()}\n\`\`\``,
+        );
 
-      // Convert the after markdown to HTML
-      const afterHtml = await markdownToHtml(after ? after.trim() : '');
+        // Convert the after markdown to HTML
+        const afterHtml = await markdownToHtml(after ? after.trim() : '');
 
-      return `<div class="file-changes">
-                <div class="file-header">${fileName}</div>
-                <div class="change-block">
-                <div>
-                    <h3>Before</h3>
-                    <div>${beforeHtml}</div>
-                </div>
-                <div>
-                    <h3>After</h3>
-                    <div>${afterHtml}</div>
-                </div>
-                </div>
-            </div>`;
-    }),
-  );
+        return `<div class="file-changes">
+                    <div class="file-header">${fileName}</div>
+                    <div class="change-block">
+                    <div>
+                        <h3>Before</h3>
+                        <div>${beforeHtml}</div>
+                    </div>
+                    <div>
+                        <h3>After</h3>
+                        <div>${afterHtml}</div>
+                    </div>
+                    </div>
+                </div>`;
+      }),
+    );
 
-  htmlBlocks.forEach((block) => (content += block));
+    htmlBlocks.forEach((block) => (content += block));
 
-  content += '</body></html>';
+    content += `<script>
+                    hljs.highlightAll();
+                  </script>
+                  </body>
+                  </html>`;
 
-  fs.writeFileSync(htmlFilePath, content.trim());
+    fs.writeFileSync(htmlFilePath, content.trim());
+  } catch (err) {
+    console.error(`Error writing to HTML file: ${err}`);
+    process.exit(1);
+  }
 
   console.log(`HTML file created containing all changes: ${htmlFilePath}`);
 }

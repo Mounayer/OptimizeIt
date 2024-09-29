@@ -43,7 +43,12 @@ function markDownFileWriter(allResponses: MarkDownPayload[]): void {
     content += `${after ? after.trim() : ''}\n\n`;
   });
 
-  fs.writeFileSync(markdownFilePath, content.trim());
+  try {
+    fs.writeFileSync(markdownFilePath, content.trim());
+  } catch (err) {
+    console.error(`Error writing to MarkDown file: ${err}`);
+    process.exit(1);
+  }
 
   console.log(
     `Markdown file created containing all changes: ${markdownFilePath}`,

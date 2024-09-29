@@ -7,6 +7,9 @@ import handleOutputFlag from './flag_handlers/output';
 import handleMarkdownFlag from './flag_handlers/markdown';
 import handleHTMLFlag from './flag_handlers/html';
 import { Config } from '../interfaces';
+import handleTokenFlag from './flag_handlers/tokenInfo';
+import handleDirectoryFlag from './flag_handlers/directory';
+import directoryParser from './directory_parser';
 
 /**
  * Handles the file names passed as arguments.
@@ -36,13 +39,16 @@ function argHandler(options: Config) {
 
   handleVersionFlag(args);
   handleHelpFlag(args);
-  const fileNames = handleFileNames(args);
+  const directory = handleDirectoryFlag(args);
+  const fileNames =
+    directory !== null ? directoryParser(directory) : handleFileNames(args);
   const model = handleModelFlag(args, options.model);
   const temperature = handleTemperatureFlag(args, options.temperature);
   const apiKey = handleApiKeyFlag(args, options.apiKey);
   const { output, outputFiles } = handleOutputFlag(args, options.output);
   const markDown = handleMarkdownFlag(args, options.markdown);
   const html = handleHTMLFlag(args, options.html);
+  const tokenUsageInformation = handleTokenFlag(args);
 
   return {
     fileNames,
@@ -53,6 +59,7 @@ function argHandler(options: Config) {
     outputFiles,
     markDown,
     html,
+    tokenUsageInformation,
   };
 }
 
