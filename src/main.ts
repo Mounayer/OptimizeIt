@@ -8,16 +8,14 @@ import fileWriter from './file_writer';
 import type { MarkDownPayload } from './interfaces';
 import markDownFileWriter from './markdown_file_writer';
 import htmlFileWriter from './html_file_writer';
-import { parse, stringify } from 'smol-toml';
+import tomlParser from './toml_parser';
 
 /**
  * Main function to run the program.
  */
 async function main() {
   const config = fileParser('.options.toml');
-  const options = parse(config);
-  const parsed = stringify(options);
-  console.log(`Using options:\n${parsed}`);
+  const options = tomlParser(config);
 
   const {
     fileNames,
@@ -28,12 +26,8 @@ async function main() {
     outputFiles,
     markDown,
     html,
-<<<<<<< HEAD
-  } = argHandler(options);
-=======
     tokenUsageInformation, // add tokenUsageInformation for issue-12 to get information about token usage
-  } = argHandler();
->>>>>>> main
+  } = argHandler(options);
 
   const groqClient = GroqChat.getInstance(apiKey);
 
@@ -64,6 +58,7 @@ async function main() {
     }
 
     if (output && i < outputFiles.length) {
+      console.log(`Writing to ${outputFiles[i]}`);
       fileWriter(response as string, outputFiles[i]);
     }
   }

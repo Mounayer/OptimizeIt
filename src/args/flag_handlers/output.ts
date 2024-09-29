@@ -10,7 +10,6 @@ function handleOutputFlag(
   args: string[],
   outputConfig: string[] | undefined,
 ): OutputFlagPayload {
-  let output = false;
   const outputFiles: string[] = outputConfig || []; // Initialize as an empty array
 
   const outputFlagIndex = args.findIndex(
@@ -18,8 +17,6 @@ function handleOutputFlag(
   );
 
   if (outputFlagIndex !== -1) {
-    output = true;
-
     // Collect all filenames after the '-o' or '--output' flag
     for (let i = outputFlagIndex + 1; i < args.length; i++) {
       if (args[i][0] === '-') break; // Stop if another flag is encountered
@@ -27,12 +24,12 @@ function handleOutputFlag(
     }
   }
 
-  if (output) {
+  if (outputFiles.length > 0) {
     console.log('outputFiles:', JSON.stringify(outputFiles));
   }
 
   return {
-    output,
+    output: outputFiles.length > 0,
     outputFiles,
   };
 }
