@@ -24,10 +24,8 @@ function handleTemperatureFlag(
       console.error('Temperature value provided is invalid.');
       process.exit(1);
     }
-
-    console.log('temperature:', temperature);
   }
-
+  console.log('temperature:', temperature);
   return temperature;
 }
 

@@ -9,7 +9,7 @@ import { parse, TomlPrimitive } from 'smol-toml'; // you can import stringify fr
  */
 function tomlParser(): Record<string, TomlPrimitive> {
   try {
-    const configFile = path.resolve('.config.toml');
+    const configFile = path.resolve('.options.toml');
 
     // Check if the file exists
     if (!fs.existsSync(configFile)) {
@@ -18,10 +18,10 @@ function tomlParser(): Record<string, TomlPrimitive> {
 
     const config = fs.readFileSync(configFile, 'utf8');
     const parsedConfig = parse(config);
+
     return parsedConfig;
-  } catch (err: any) {
-    const message = err.message.split('\n')[0];
-    console.error(`${message}`);
+  } catch (err) {
+    console.error(`${err}`);
     process.exit(1);
   }
 }

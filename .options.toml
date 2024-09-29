@@ -1,4 +1,6 @@
 output = ["test1.cpp", "test2.cpp", "test3.cpp"] # an array of filenames for the output flag
+temperature = 0.8
 html = true # sets html flag to true
 markdown = true # sets markdown flag to true
 random = "hello hello" # invalid flag
+break = asd
