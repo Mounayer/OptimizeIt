@@ -16,4 +16,5 @@ export interface Config {
   output?: string[];
   markdown?: boolean;
   html?: boolean;
+  tokenUsage?: boolean;
 }

@@ -4,12 +4,11 @@ import { parse, TomlPrimitive } from 'smol-toml'; // you can import stringify fr
 
 /**
  * Function to parse the TOML file.
- * @param config - The TOML configuration.
  * @returns The parsed TOML configuration.
  */
 function tomlParser(): Record<string, TomlPrimitive> {
   try {
-    const configFile = path.resolve('.options.toml');
+    const configFile = path.resolve('.optimizeit-config.toml');
 
     // Check if the file exists
     if (!fs.existsSync(configFile)) {

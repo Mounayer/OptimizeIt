@@ -48,7 +48,7 @@ function argHandler(configOptions: Config) {
   const { output, outputFiles } = handleOutputFlag(args, configOptions.output);
   const markDown = handleMarkdownFlag(args, configOptions.markdown);
   const html = handleHTMLFlag(args, configOptions.html);
-  const tokenUsageInformation = handleTokenFlag(args);
+  const tokenUsageInformation = handleTokenFlag(args, configOptions.tokenUsage);
 
   return {
     fileNames,

@@ -1,0 +1,22 @@
+# Currently supports these options:
+
+# model <string>: Specify the model name to use
+# model = "model-name"
+
+# temperature <number>: Set model temperature (0.1 to 2)
+# temperature = 0.5
+
+# apiKey <string>: Provide your API key
+# apiKey: "your-api-key"
+
+# output: Specify output file(s) to save changes
+# output = ["test1.cpp", "test2.cpp", "test3.cpp"]
+
+# markdown <boolean>: Generate a markdown file with all changes
+# markdown = true
+
+# html <boolean>: Generate an HTML file with all changes
+# html = true
+
+# tokenUsage <boolean>: Get token usage information
+# tokenUsage = true
