@@ -10,6 +10,7 @@ import { Config } from '../interfaces';
 import handleTokenFlag from './flag_handlers/tokenInfo';
 import handleDirectoryFlag from './flag_handlers/directory';
 import directoryParser from './directory_parser';
+import tomlParser from '../toml_parser';
 
 /**
  * Handles the file names passed as arguments.
@@ -34,7 +35,8 @@ function handleFileNames(args: string[]): string[] {
  *
  * @returns The arguments passed to the CLI.
  */
-function argHandler(configOptions: Config) {
+function argHandler() {
+  const configOptions: Config = tomlParser();
   const args = process.argv.slice(2);
 
   handleVersionFlag(args);

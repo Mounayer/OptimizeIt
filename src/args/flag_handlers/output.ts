@@ -11,13 +11,14 @@ function handleOutputFlag(
   args: string[],
   outputConfig: string[] | undefined,
 ): OutputFlagPayload {
-  const outputFiles: string[] = outputConfig || []; // Initialize as an empty array
+  let outputFiles: string[] = outputConfig || []; // Initialize as an empty array
 
   const outputFlagIndex = args.findIndex(
     (arg) => arg === '-o' || arg === '--output',
   );
 
   if (outputFlagIndex !== -1) {
+    outputFiles = [];
     // Collect all filenames after the '-o' or '--output' flag
     for (let i = outputFlagIndex + 1; i < args.length; i++) {
       if (args[i][0] === '-') break; // Stop if another flag is encountered

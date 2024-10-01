@@ -8,14 +8,11 @@ import fileWriter from './file_writer';
 import type { MarkDownPayload } from './interfaces';
 import markDownFileWriter from './markdown_file_writer';
 import htmlFileWriter from './html_file_writer';
-import tomlParser from './toml_parser';
 
 /**
  * Main function to run the program.
  */
 async function main() {
-  const configOptions = tomlParser();
-
   const {
     fileNames,
     model,
@@ -26,7 +23,7 @@ async function main() {
     markDown,
     html,
     tokenUsageInformation, // add tokenUsageInformation for issue-12 to get information about token usage
-  } = argHandler(configOptions);
+  } = argHandler();
 
   const groqClient = GroqChat.getInstance(apiKey);
 
