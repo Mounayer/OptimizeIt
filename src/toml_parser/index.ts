@@ -1,5 +1,6 @@
 import * as fs from 'fs';
 import * as path from 'path';
+import os from 'os';
 import { parse, TomlPrimitive } from 'smol-toml'; // you can import stringify from 'smol-toml' as well if you want to stringify TOML objects
 
 /**
@@ -8,7 +9,8 @@ import { parse, TomlPrimitive } from 'smol-toml'; // you can import stringify fr
  */
 function tomlParser(): Record<string, TomlPrimitive> {
   try {
-    const configFile = path.resolve('.optimizeit-config.toml');
+    const homeDir = os.homedir();
+    const configFile = path.join(homeDir, '.optimizeit-config.toml');
 
     // Check if the file exists
     if (!fs.existsSync(configFile)) {
