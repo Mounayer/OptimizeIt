@@ -4,6 +4,7 @@ import type { OutputFlagPayload } from '../../interfaces';
  * Handle the output flag and return the output flag and output files.
  *
  * @param { string[] } args - The arguments passed to the CLI.
+ * @param { string[] | undefined } outputConfig - The output files from the config file.
  * @returns  { OutputFlagPayload } The output flag and output files.
  */
 function handleOutputFlag(

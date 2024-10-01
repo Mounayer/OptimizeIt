@@ -2,6 +2,7 @@
  * Handle the temperature flag and return the temperature value
  *
  * @param { string[] } args - The arguments passed to the CLI.
+ * @param { number } tempConfig - The temperature value from the config file.
  * @returns { number } The temperature value.
  */
 function handleTemperatureFlag(

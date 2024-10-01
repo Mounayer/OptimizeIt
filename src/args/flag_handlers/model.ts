@@ -2,6 +2,7 @@
  * This function handles the model flag and returns the model name.
  *
  * @param { string[] } args - The arguments passed to the CLI.
+ * @param { string } modelConfig - The model name from the config file.
  * @returns { string } The model name.
  */
 function handleModelFlag(
