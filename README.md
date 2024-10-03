@@ -165,6 +165,38 @@ This can also be conveniently combined with other flags, i.e.:
 optimizeit -d examples --html
 ```
 
+## TOML config
+
+Optimizeit supports reading a `.toml` config file in the user's home directory to use as option flags when provided.
+
+Create a `.optimizeit-config.toml` file in the home directory, and provide options to use.
+Currently supports the following options:
+
+```toml
+# model <string>: Specify the model name to use
+model = "model-name"
+
+# temperature <number>: Set model temperature (0.1 to 2)
+temperature = 0.5
+
+# apiKey <string>: Provide your API key
+apiKey: "your-api-key"
+
+# output: Specify output file(s) to save changes
+output = ["test1.cpp", "test2.cpp", "test3.cpp"]
+
+# markdown <boolean>: Generate a markdown file with all changes
+markdown = true
+
+# html <boolean>: Generate an HTML file with all changes
+html = true
+
+# tokenUsage <boolean>: Get token usage information
+tokenUsage = true
+```
+
+NOTE: `apiKey` still must be provided either through `.env`, command-line argument, or `.optimizeit-config.toml`. The rest are all optional.
+
 ## Notable Dependencies
 
 ### Groq
