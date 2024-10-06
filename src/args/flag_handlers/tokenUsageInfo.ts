@@ -9,7 +9,7 @@ function handleTokenFlag(
   args: string[],
   tokenConfig: boolean = false,
 ): boolean {
-  return args.includes('--token-usage') || args.includes('-tu') || tokenConfig;
+  return args.includes('--token-usage') || args.includes('-u') || tokenConfig;
 }
 
 export default handleTokenFlag;

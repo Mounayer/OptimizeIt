@@ -1,4 +1,4 @@
-import type { OutputFlagPayload } from '../../interfaces';
+import OutputFlagPayload from '../../interfaces/outputFlagPayload';
 
 /**
  * Handle the output flag and return the output flag and output files.

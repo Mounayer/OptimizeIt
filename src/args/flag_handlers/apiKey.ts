@@ -1,3 +1,5 @@
+import getFlagValue from '../helpers/getFlagValue';
+
 /**
  * Handle the API key flag and return the API key.
  *
@@ -11,16 +13,9 @@ function handleApiKeyFlag(
 ): string {
   let apiKey = process.env.GROQ_API_KEY || apiKeyConfig || '';
 
-  const apiKeyFlagIndex = args.findIndex(
-    (arg) => arg === '-a' || arg === '--api-key',
-  );
+  const apiKeyFromFlag = getFlagValue(args, ['-a', '--api-key'], apiKey);
 
-  if (apiKeyFlagIndex !== -1 && apiKeyFlagIndex + 1 < args.length) {
-    apiKey =
-      args[apiKeyFlagIndex + 1][0] !== '-' ? args[apiKeyFlagIndex + 1] : apiKey;
-  }
-
-  return apiKey;
+  return apiKeyFromFlag || apiKey;
 }
 
 export default handleApiKeyFlag;

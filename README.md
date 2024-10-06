@@ -147,7 +147,7 @@ This flag allows you print the completion token, prompt token, and total token t
 
 ```bash
 optimizeit file1 --token-usage
-optimizeit file1 file2 -tu
+optimizeit file1 file2 -u
 ```
 
 ### Directory

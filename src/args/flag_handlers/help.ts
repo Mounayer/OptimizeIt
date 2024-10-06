@@ -17,7 +17,7 @@ function handleHelpFlag(args: string[]) {
     -m, --model <name>     Specify the model name to use
     -t, --temperature <n>  Set model temperature (0.1 to 2)
     -a, --api-key <key>    Provide your API key
-    -tu, --token-usage     Get token usage information
+    -u, --token-usage     Get token usage information
     -d, --dir <directory>  Specify a directory to optimize all files
   
   Examples:

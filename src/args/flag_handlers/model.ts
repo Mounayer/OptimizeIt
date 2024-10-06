@@ -1,3 +1,5 @@
+import getFlagValue from '../helpers/getFlagValue';
+
 /**
  * This function handles the model flag and returns the model name.
  *
@@ -9,16 +11,10 @@ function handleModelFlag(
   args: string[],
   modelConfig: string = 'llama-3.1-70b-versatile',
 ): string {
-  let model = modelConfig;
+  const model =
+    getFlagValue(args, ['-m', '--model'], modelConfig) || modelConfig;
 
-  const modelFlagIndex = args.findIndex(
-    (arg) => arg === '-m' || arg === '--model',
-  );
-
-  if (modelFlagIndex !== -1 && modelFlagIndex + 1 < args.length) {
-    model =
-      args[modelFlagIndex + 1][0] !== '-' ? args[modelFlagIndex + 1] : model;
-
+  if (model !== modelConfig) {
     console.log('model:', model);
   }
 

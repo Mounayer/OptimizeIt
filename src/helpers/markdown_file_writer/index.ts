@@ -1,6 +1,6 @@
 import * as fs from 'fs';
 import * as path from 'path';
-import { MarkDownPayload } from '../interfaces';
+import MarkDownPayload from '../../interfaces/markDownPayload';
 
 /**
  * Extract the language from the markdown code block.

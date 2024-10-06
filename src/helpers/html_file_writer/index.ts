@@ -1,6 +1,6 @@
 import * as fs from 'fs';
 import * as path from 'path';
-import { MarkDownPayload } from '../interfaces';
+import MarkDownPayload from '../../interfaces/markDownPayload';
 import { extractLanguage } from '../markdown_file_writer';
 import { marked } from 'marked';
 
