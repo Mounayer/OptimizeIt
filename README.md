@@ -8,33 +8,9 @@ If you'd like to see more, here is a link to a thorough [Demo](https://www.youtu
 
 If you'd like to read more about how this project was approached, feel free to check out my [Blog Post](https://dev.to/majd_almnayer_2101/from-good-to-great-code-with-optimizeit-4p0n).
 
-## How to run
+## How to use
 
-Create a .env file, and provide your api key, i.e.:
-
-```
-GROQ_API_KEY=YOUR_API_KEY_HERE
-```
-
-Install dependencies:
-
-```bash
-npm install
-```
-
-Build:
-
-```bash
-npm run build
-```
-
-Link:
-
-```bash
-npm link
-```
-
-Run, you can use some of the examples that already exist:
+You can use some of the examples that already exist:
 
 ```bash
 optimizeit examples/main.cpp
@@ -196,21 +172,3 @@ tokenUsage = true
 ```
 
 NOTE: `apiKey` still must be provided either through `.env`, command-line argument, or `.optimizeit-config.toml`. The rest are all optional.
-
-## Notable Dependencies
-
-### Groq
-
-This [library](https://www.npmjs.com/package/groq-sdk) provides convenient and easy access to the Groq REST API from server-side TypeScript or JavaScript which allows using their LLM's for chat completion
-
-### Marked
-
-A [markdown parser](https://www.npmjs.com/package/marked) which converts markdown into HTML -- this was used for generating html pages after comparison. Marked is built for speed and super light-weight!
-
-### Prettier
-
-[Prettier](https://www.npmjs.com/package/prettier?activeTab=readme) is a code formatted which enforces consistent style by parsing the code and re-printing it with the rules set in `.prettierrc` file.
-
-### Eslint
-
-[Eslint](https://www.npmjs.com/package/eslint) is used to identify issues in and evaluate the code.

@@ -4,6 +4,7 @@ import tseslint from '@typescript-eslint/eslint-plugin';
 import tsParser from '@typescript-eslint/parser';
 import prettier from 'eslint-plugin-prettier';
 import prettierConfig from 'eslint-config-prettier';
+import oxlint from 'eslint-plugin-oxlint';
 
 export default [
   {
@@ -16,10 +17,12 @@ export default [
     plugins: {
       prettier,
       '@typescript-eslint': tseslint,
+      oxlint,
     },
     rules: {
       ...pluginJs.configs.recommended.rules,
       ...tseslint.configs.recommended.rules,
+      ...oxlint.configs.recommended.rules,
       'prettier/prettier': 'error',
       '@typescript-eslint/no-explicit-any': 'off',
     },
