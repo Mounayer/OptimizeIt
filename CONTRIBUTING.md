@@ -34,11 +34,48 @@ you can then use it as such:
 optimizeit examples/main.cpp
 ```
 
+## Testing
+
+For testing, OptimizeIt uses [Jest](https://jestjs.io/docs/getting-started).
+
+Below are all of the test scripts that exist, some can be very useful during development!
+
+This script runs all the tests:
+
+```bash
+npm run test
+```
+
+This script runs all the unit tests:
+
+```bash
+npm run test:unit
+```
+
+This script runs a singular test file:
+
+```bash
+npm run test:file testfilename.test.ts
+```
+
+This script watches for any source code changes, and runs all tests when you save a file:
+
+```bash
+npm run test:watch
+```
+
+This script calculates the coverage of the tests against the source code, and generates a `coverage` folder that contains a detailed reports to what is and what isn't covered by the tests:
+
+```bash
+npm run test:coverage
+```
+
 ## Linting & Formatting
 
 ### Prerequisites
 
 For your IDE, please install the following extensions:
+
 - ESLint
 - Prettier - Code formatter
 
@@ -77,11 +114,7 @@ The following config in `package.json` tells `husky` what to do on pre-commits:
 ```json
 {
   "lint-staged": {
-    "*.{js,ts,json}": [
-      "prettier --write",
-      "eslint --fix",
-      "npx oxlint --fix"
-    ]
+    "*.{js,ts,json}": ["prettier --write", "eslint --fix", "npx oxlint --fix"]
   }
 }
 ```
@@ -103,3 +136,7 @@ A [markdown parser](https://www.npmjs.com/package/marked) which converts markdow
 ### Eslint
 
 [Eslint](https://www.npmjs.com/package/eslint) is used to identify issues in and evaluate the code.
+
+### Jest
+
+[Jest](https://jestjs.io/docs/getting-started) is used to thoroughly test and mock small pieces of OptimizeIt.
