@@ -9,9 +9,9 @@ export default class GroqChat {
   private groqClient: Groq;
 
   // Token usage information
-  private totalPromptTokens: number = 0;
-  private totalCompletionTokens: number = 0;
-  private totalTokens: number = 0;
+  public totalPromptTokens: number = 0;
+  public totalCompletionTokens: number = 0;
+  public totalTokens: number = 0;
 
   private constructor(apiKey: string) {
     this.groqClient = new Groq({
