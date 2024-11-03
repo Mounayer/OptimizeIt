@@ -5,6 +5,7 @@ import tsParser from '@typescript-eslint/parser';
 import prettier from 'eslint-plugin-prettier';
 import prettierConfig from 'eslint-config-prettier';
 import oxlint from 'eslint-plugin-oxlint';
+import jest from 'eslint-plugin-jest';
 
 export default [
   {
@@ -12,12 +13,13 @@ export default [
     ignores: ['dist/**', 'examples/**', 'output/**'],
     languageOptions: {
       parser: tsParser,
-      globals: { ...globals.browser, ...globals.node },
+      globals: { ...globals.browser, ...globals.node, ...globals.jest },
     },
     plugins: {
       prettier,
       '@typescript-eslint': tseslint,
       oxlint,
+      jest,
     },
     rules: {
       ...pluginJs.configs.recommended.rules,
