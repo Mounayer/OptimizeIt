@@ -1,0 +1,23 @@
+{
+  "name": "optimizeit-dev",
+  "build": { "dockerfile": "Dockerfile" },
+
+  "customizations": {
+    "settings": {
+      "editor.formatOnSave": true
+    },
+    "vscode": {
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "ms-azuretools.vscode-docker",
+        "ms-vscode.vscode-typescript-next",
+        "GitHub.vscode-pull-request-github"
+      ]
+    }
+  },
+
+  "forwardPorts": [3000],
+  // command to be executed after the dev container is set up
+  "postCreateCommand": "npm install"
+}
