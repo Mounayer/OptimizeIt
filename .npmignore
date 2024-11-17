@@ -1,0 +1,13 @@
+src/
+tests/
+.eslintrc.json
+.prettierrc.json
+jest.config.js
+tsconfig.json
+.husky/
+.github/
+.git/
+coverage/
+node_modules/
+.env
+.env.example
