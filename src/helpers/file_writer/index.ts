@@ -17,7 +17,7 @@ function fileWriter(data: string, outputFile: string): void {
 
     data = data.replace(/```$/, '').trim();
 
-    const outputDir = path.resolve(__dirname, '../../output');
+    const outputDir = path.join(process.cwd(), 'output');
 
     console.log('outputDir', outputDir);
     if (!fs.existsSync(outputDir)) {
