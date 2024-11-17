@@ -9,6 +9,7 @@ If you'd like to see more, here is a link to a thorough [Demo](https://www.youtu
 If you'd like to read more about how this project was approached, feel free to check out my [Blog Post](https://dev.to/majd_almnayer_2101/from-good-to-great-code-with-optimizeit-4p0n).
 
 ## Installation
+
 ```bash
 npm install -g optimizeit
 ```
@@ -71,7 +72,7 @@ optimizeit file1 file2 -md
 
 ### Output
 
-This creates a file in the output folder containing all the changes, you may provide more than 1 output file per file given, usage:
+This creates an output folder in the current directory, if it doesn't exist, then it creates a file in the output folder containing all the changes, you may provide more than 1 output file per file given, usage:
 
 ```bash
 optimizeit file1 --output file1
@@ -161,7 +162,7 @@ model = "model-name"
 temperature = 0.5
 
 # apiKey <string>: Provide your API key
-apiKey: "your-api-key"
+apiKey = "your-api-key"
 
 # output: Specify output file(s) to save changes
 output = ["test1.cpp", "test2.cpp", "test3.cpp"]
