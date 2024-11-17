@@ -17,6 +17,14 @@
     "test:file": "jest --findRelatedTests",
     "test:coverage": "jest --coverage"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mounayer/OptimizeIt.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Mounayer/OptimizeIt/issues"
+  },
+  "homepage": "https://github.com/Mounayer/OptimizeIt#readme",
   "lint-staged": {
     "*.{js,ts,json}": [
       "prettier --write",
@@ -27,7 +35,12 @@
   "bin": {
     "optimizeit": "./dist/main.js"
   },
-  "keywords": [],
+  "keywords": [
+    "code-optimization",
+    "cli",
+    "development-tools",
+    "performance"
+  ],
   "author": "Majd Al Mnayer",
   "license": "ISC",
   "devDependencies": {
