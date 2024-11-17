@@ -52,15 +52,23 @@ describe('fileWriter', () => {
   test('creates the output directory if it does not exist', () => {
     const data = 'Sample file content';
     const outputFile = 'output.txt';
-    const outputDir = '/mocked/output';
+    const mockCwd = '/mocked/current/directory';
+    const outputDir = '/mocked/current/directory/output';
     const outputPath = `${outputDir}/${outputFile}`;
 
-    (path.resolve as jest.Mock).mockReturnValue(outputDir);
-    (path.join as jest.Mock).mockReturnValue(outputPath);
+    jest.spyOn(process, 'cwd').mockReturnValue(mockCwd);
+
+    (path.join as jest.Mock)
+      .mockReturnValueOnce(outputDir)
+      .mockReturnValueOnce(outputPath);
+
     (fs.existsSync as jest.Mock).mockReturnValue(false);
 
     fileWriter(data, outputFile);
 
+    expect(process.cwd).toHaveBeenCalled();
+    expect(path.join).toHaveBeenCalledWith(mockCwd, 'output');
+    expect(path.join).toHaveBeenCalledWith(outputDir, outputFile);
     expect(fs.mkdirSync).toHaveBeenCalledWith(outputDir, { recursive: true });
     expect(fs.writeFileSync).toHaveBeenCalledWith(outputPath, data);
   });
