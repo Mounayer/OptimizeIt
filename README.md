@@ -8,6 +8,11 @@ If you'd like to see more, here is a link to a thorough [Demo](https://www.youtu
 
 If you'd like to read more about how this project was approached, feel free to check out my [Blog Post](https://dev.to/majd_almnayer_2101/from-good-to-great-code-with-optimizeit-4p0n).
 
+## Installation
+```bash
+npm install -g optimizeit
+```
+
 ## How to use
 
 You can use some of the examples that already exist:
