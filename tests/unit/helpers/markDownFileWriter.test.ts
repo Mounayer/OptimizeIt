@@ -47,13 +47,26 @@ describe('markDownFileWriter', () => {
   });
 
   test('creates output directory if it does not exist', () => {
+    const mockCwd = '/mocked/current/directory';
+    const outputDir = '/mocked/current/directory/output';
+    const markdownFilePath = `${outputDir}/changes.md`;
+
+    jest.spyOn(process, 'cwd').mockReturnValue(mockCwd);
+
+    (path.join as jest.Mock)
+      .mockReturnValueOnce(outputDir)
+      .mockReturnValueOnce(markdownFilePath);
+
     (fs.existsSync as jest.Mock).mockReturnValue(false);
     (fs.mkdirSync as jest.Mock).mockImplementation(() => {});
     (fs.writeFileSync as jest.Mock).mockImplementation(() => {});
 
     markDownFileWriter(mockResponses);
 
-    expect(fs.mkdirSync).toHaveBeenCalledWith(mockedOutputDir, {
+    expect(process.cwd).toHaveBeenCalled();
+    expect(path.join).toHaveBeenCalledWith(mockCwd, 'output');
+    expect(path.join).toHaveBeenCalledWith(outputDir, 'changes.md');
+    expect(fs.mkdirSync).toHaveBeenCalledWith(outputDir, {
       recursive: true,
     });
   });

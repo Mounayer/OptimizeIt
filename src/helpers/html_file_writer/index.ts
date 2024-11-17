@@ -20,7 +20,7 @@ async function markdownToHtml(markdownText: string): Promise<string> {
  * @param { MarkDownPayload[] } allResponses - The name, before and after of every file processed.
  */
 async function htmlFileWriter(allResponses: MarkDownPayload[]): Promise<void> {
-  const outputDir = path.resolve(__dirname, '../../output');
+  const outputDir = path.join(process.cwd(), 'output');
 
   // Create directory if it doesn't exist
   if (!fs.existsSync(outputDir)) {

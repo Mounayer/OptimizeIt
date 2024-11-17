@@ -61,15 +61,23 @@ describe('htmlFileWriter', () => {
       },
     ];
 
-    const outputDir = '/mocked/output';
+    const mockCwd = '/mocked/current/directory';
+    const outputDir = '/mocked/current/directory/output';
     const htmlFilePath = `${outputDir}/changes.html`;
 
-    (path.resolve as jest.Mock).mockReturnValue(outputDir);
-    (path.join as jest.Mock).mockReturnValue(htmlFilePath);
+    jest.spyOn(process, 'cwd').mockReturnValue(mockCwd);
+
+    (path.join as jest.Mock)
+      .mockReturnValueOnce(outputDir)
+      .mockReturnValueOnce(htmlFilePath);
+
     (fs.existsSync as jest.Mock).mockReturnValue(false);
 
     await htmlFileWriter(mockResponses);
 
+    expect(process.cwd).toHaveBeenCalled();
+    expect(path.join).toHaveBeenCalledWith(mockCwd, 'output');
+    expect(path.join).toHaveBeenCalledWith(outputDir, 'changes.html');
     expect(fs.mkdirSync).toHaveBeenCalledWith(outputDir, { recursive: true });
     expect(fs.writeFileSync).toHaveBeenCalledWith(
       expect.any(String),
