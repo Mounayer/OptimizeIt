@@ -50,4 +50,29 @@ describe('tomlParser', () => {
     expect(fs.readFileSync).not.toHaveBeenCalled();
     expect(parse).not.toHaveBeenCalled();
   });
+
+  test('logs an error and exits the process if an error occurs', () => {
+    const mockError = new Error('Mocked parser error');
+    (fs.existsSync as jest.Mock).mockReturnValue(true);
+    (fs.readFileSync as jest.Mock).mockImplementation(() => {
+      throw mockError;
+    });
+
+    const consoleErrorSpy = jest
+      .spyOn(console, 'error')
+      .mockImplementation(() => {});
+    const processExitSpy = jest
+      .spyOn(process, 'exit')
+      .mockImplementation(() => {
+        throw new Error('exit called');
+      });
+
+    expect(() => tomlParser()).toThrow('exit called');
+
+    expect(consoleErrorSpy).toHaveBeenCalledWith(`${mockError}`);
+    expect(processExitSpy).toHaveBeenCalledWith(1);
+
+    consoleErrorSpy.mockRestore();
+    processExitSpy.mockRestore();
+  });
 });
