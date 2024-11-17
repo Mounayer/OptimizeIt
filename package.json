@@ -1,6 +1,6 @@
 {
   "name": "optimizeit",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "OptimizeIt is a command-line tool that automatically optimizes source code for performance and readability, supporting multiple programming languages and configurable settings.",
   "main": "index.js",
   "scripts": {
